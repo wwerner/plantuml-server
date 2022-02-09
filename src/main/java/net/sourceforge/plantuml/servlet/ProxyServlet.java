@@ -72,14 +72,6 @@ public class ProxyServlet extends HttpServlet {
         // ignore invalid lines; could also throw IAE
 
         // rewrite includes
-        /*
-        1. parse url to find common prefix -> base
-        2. for each line that is an !include w/ relative path
-        2.1. get filename by removing !include
-        2.2. generate url for included file:  base + included filename -> url
-        3. replace '!include file' w/ '!includeurl url'
-        4. think about security first :-) ¯\_(ツ)_/¯
-        */
         if (line == null || !line.trim().startsWith(PU_INCLUDE_OP)) {
             return line;
         }
