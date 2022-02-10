@@ -3,7 +3,7 @@ name: Docker publication only
 on:
   push:
     tags:
-      - "docker-*"
+      - "exp-*"
 
 jobs:
 
