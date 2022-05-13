@@ -1,0 +1,6 @@
+@startuml
+node A
+node B
+
+A -> B
+@enduml

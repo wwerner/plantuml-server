@@ -1,0 +1,12 @@
+@startuml
+!include ./testInclude 2.iuml
+
+!include https://raw.githubusercontent.com/wwerner/plantuml-sample/main/docs/test.txt
+'!include https://raw.githubusercontent.com/wwerner/plantuml-sample/main/docs/flow-chart.puml
+
+node C
+
+A -> C
+B -> C
+
+@enduml

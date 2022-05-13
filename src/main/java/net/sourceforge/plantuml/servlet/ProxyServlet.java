@@ -83,7 +83,7 @@ public class ProxyServlet extends HttpServlet {
 
         String path = line.substring(PU_INCLUDE_OP.length());
 
-        String proxy = "https://8071-178-27-145-111.ngrok.io/plantuml/proxy"; // calculate or get from env //FIXME
+        String proxy = "https://9d33-178-27-145-111.ngrok.io/plantuml/proxy"; // calculate or get from env //FIXME
 
         // String.format("%s %s?cache=no&format=preproc&src=%s/%s", PU_INCLUDEURL_OP, proxy,prefix, path)
         return PU_INCLUDEURL_OP
