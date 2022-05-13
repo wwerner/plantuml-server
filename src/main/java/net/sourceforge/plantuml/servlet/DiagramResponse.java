@@ -108,13 +108,19 @@ public class DiagramResponse {
      *
      * @param uml textual UML diagram(s) source
      * @param idx diagram index of {@code uml} to send
-     *
      * @throws IOException if an input or output exception occurred
      */
     public void sendDiagram(String uml, int idx) throws IOException {
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.setContentType(getContentType());
         SourceStringReader reader = new SourceStringReader(uml);
+
+        response.addHeader("Content-Type", format.getMimeType());
+        if (format == FileFormat.PREPROC) {
+            response.getOutputStream().write(uml.getBytes());
+            return;
+        }
+
         if (format == FileFormat.BASE64) {
             byte[] imageBytes;
             try (ByteArrayOutputStream outstream = new ByteArrayOutputStream()) {
@@ -146,7 +152,6 @@ public class DiagramResponse {
      * Is block uml unmodified?
      *
      * @param blockUml block uml
-     *
      * @return true if unmodified; otherwise false
      */
     private boolean notModified(BlockUml blockUml) {
@@ -167,7 +172,6 @@ public class DiagramResponse {
      *
      * @param uml textual UML diagram source
      * @param idx diagram index of {@code uml} to send
-     *
      * @throws IOException if an input or output exception occurred
      */
     public void sendMap(String uml, int idx) throws IOException {
@@ -194,15 +198,14 @@ public class DiagramResponse {
      * Check the syntax of the diagram and send a report in TEXT format.
      *
      * @param uml textual UML diagram source
-     *
      * @throws IOException if an input or output exception occurred
      */
     public void sendCheck(String uml) throws IOException {
         response.setContentType(getContentType());
         SourceStringReader reader = new SourceStringReader(uml);
         DiagramDescription desc = reader.outputImage(
-            new NullOutputStream(),
-            new FileFormatOption(FileFormat.PNG, false)
+                new NullOutputStream(),
+                new FileFormatOption(FileFormat.PNG, false)
         );
         PrintWriter httpOut = response.getWriter();
         httpOut.print(desc.getDescription());
